@@ -3,6 +3,7 @@
 DIST=dist
 rm -rf $DIST
 mkdir $DIST
+mv 404.html $DIST
 
 for d in */ ; do
   base=$(basename $d)
