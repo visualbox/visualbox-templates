@@ -3,11 +3,11 @@
 DIST=dist
 rm -rf $DIST
 mkdir $DIST
-mv 404.html $DIST
+mv netlify/* $DIST
 
 for d in */ ; do
   base=$(basename $d)
-  if [ $base == $DIST ]; then
+  if [ $base == $DIST ] || [ $base == "netlify" ]; then
     continue
   fi
   cd $d; zip -r "../$DIST/${base}.zip" .; cd ..
