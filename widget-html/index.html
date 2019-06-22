@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      Data: <pre id="data"></pre>
+    </div>
+
+    <script>
+      var wrapper = document.getElementById('wrapper');
+      var data = document.getElementById('data');
+    
+      /**
+       * The onMessage() function is called by the VisualBox
+       * system whenever the configuration is changed or new
+       * data becomes available.
+       */
+      function onMessage(obj) {
+
+        /**
+         * The configuration has changed by the user
+         * if the 'type' property is 'CONFIG_CHANGED'.
+         * window.CONFIG holds the configuraiton model
+         * values and can be used to access and modify
+         * the look and feel of the widget.
+         */
+        if (obj.type === 'CONFIG_CHANGED') {
+          wrapper.style.color = window.CONFIG.fontColor || '#000000';
+          wrapper.style.fontSize = window.CONFIG.fontSize + 'px';
+        }
+
+        /**
+         * The connected data source has produced new
+         * data if the 'type' property is 'DATA_CHANGED'.
+         * window.DATA holds the new data and can be
+         * used to create a visualizations.
+         */
+        if (obj.type === 'DATA_CHANGED') {
+          data.innerHTML = window.DATA || 'N/A';
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+[
+  {
+    "type": "slider",
+    "name": "fontSize",
+    "label": "Font size (px)",
+    "default": 10,
+    "min": 5,
+    "max": 90
+  },
+  {
+    "type": "color",
+    "name": "fontColor",
+    "label": "Font color",
+    "default": "#000000"
+  }
+]
