@@ -1,0 +1,14 @@
+[
+  {
+    "type": "text",
+    "name": "myVariable",
+    "label": "My Label",
+    "default": "Default value"
+  },
+  {
+    "type": "password",
+    "name": "myPassword",
+    "label": "My Password",
+    "default": "secret"
+  }
+]
