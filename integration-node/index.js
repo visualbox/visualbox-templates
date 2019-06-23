@@ -24,7 +24,7 @@ console.log('My Password: ', MODEL.myPassword);
 let n = 0;
 setInterval(() => {
   n++;
-  figlet('Hello World! ' + n, (err, data) => {
+  figlet('Hello, World! ' + n, (err, data) => {
     if (err) {
       console.log('Something went wrong...');
       return;

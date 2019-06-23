@@ -22,6 +22,6 @@ n = 0
 f = Figlet(font='slant')
 
 while True:
-  n++
+  n += 0
   visualbox.output(f.renderText("Hello, World! %d" % n))
   sleep(5)
