@@ -6,12 +6,15 @@
 # The "boot" binary will act as a middleware between the integration
 # process and VisualBox, and allows for easy communication with the
 # VisualBox service through the "visualbox" Node module.
-FROM visualboxio/utils:latest AS utils
+FROM visualboxio/utils:latest as utils
+
+# Create a common base for coming layers.
+FROM node:12-alpine as base
 
 # Create a separate layer for installing Node modules that are
 # specified in the "package.json" file.
-FROM node:12-alpine AS modules
-WORKDIR /app
+FROM base as modules
+WORKDIR /modules
 COPY package.json .
 RUN yarn
 
@@ -19,14 +22,14 @@ RUN yarn
 COPY --from=utils /node/visualbox ./node_modules/visualbox
 
 # Final image.
-FROM node:alpine
+FROM base
 WORKDIR /app
 
 # Copy over the "boot" binary middleware.
 COPY --from=utils /boot /visualbox/boot
 
 # Copy over all Node modules from the modules layer.
-COPY --from=modules /app/node_modules ./node_modules
+COPY --from=modules /modules/node_modules ./node_modules
 COPY . .
 
 # Set the container entrypoint to invoke the command
