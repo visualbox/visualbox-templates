@@ -22,42 +22,30 @@
   </head>
   <body>
     <div id="wrapper">
-      Data: <pre id="data"></pre>
+      Output: <pre id="output"></pre>
     </div>
 
     <script>
       var wrapper = document.getElementById('wrapper');
-      var data = document.getElementById('data');
+      var output = document.getElementById('output');
     
       /**
-       * The onMessage() function is called by the VisualBox
-       * system whenever the configuration is changed or new
-       * data becomes available.
+       * The callback function is called by the VisualBox
+       * system whenever the configuration is changed.
        */
-      function onMessage(obj) {
+      visualbox.onConfigChanged(function (config) {
+        wrapper.style.color = config.fontColor || '#000000';
+        wrapper.style.fontSize = config.fontSize + 'px';
+      });
 
-        /**
-         * The configuration has changed by the user
-         * if the 'type' property is 'CONFIG_CHANGED'.
-         * window.CONFIG holds the configuraiton model
-         * values and can be used to access and modify
-         * the look and feel of the widget.
-         */
-        if (obj.type === 'CONFIG_CHANGED') {
-          wrapper.style.color = window.CONFIG.fontColor || '#000000';
-          wrapper.style.fontSize = window.CONFIG.fontSize + 'px';
-        }
-
-        /**
-         * The connected data source has produced new
-         * data if the 'type' property is 'DATA_CHANGED'.
-         * window.DATA holds the new data and can be
-         * used to create a visualizations.
-         */
-        if (obj.type === 'DATA_CHANGED') {
-          data.innerHTML = window.DATA || 'N/A';
-        }
-      }
+      /**
+       * The callback function is called by the VisualBox
+       * system whenever the data source has produced new
+       * data.
+       */
+      visualbox.onDataChanged(function (data) {
+        output.innerHTML = data || 'N/A';
+      });
     </script>
   </body>
 </html>
